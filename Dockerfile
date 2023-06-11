@@ -1,3 +1,8 @@
-FROM tiangolo/uvicorn-gunicorn-fastapi:python3.10.4
+FROM tiangolo/uvicorn-gunicorn:python3.10
 
-COPY . /app
+LABEL maintainer="Sebastian Ramirez <tiangolo@gmail.com>"
+
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
+
+COPY ./app /app
