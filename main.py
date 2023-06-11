@@ -10,8 +10,7 @@ app = FastAPI(debug=True)
 async def stream_data():
     async def generate_healthcare_data():
         counter = 1
-        num_records = 0
-        while num_records < 100:
+        while True:
             record = {}
             action = random.choice(['run', 'sit', 'walk'])
             patient_type = f's{counter}_{action}'
@@ -36,7 +35,6 @@ async def stream_data():
             record['spo2_end'] = random.randint(80, 175)
 
             yield json.dumps(record)
-            num_records += 1
             await asyncio.sleep(1)
 
     async def stream_generator():
